@@ -216,7 +216,7 @@ input[type=range]#map-size-slider::-moz-range-thumb{
   </div>
 
   <div id="ov-map-wrap">
-    <img id="ov-map-img" src="" alt="mapa">
+    <canvas id="ov-map-canvas" style="width:100%;height:100%;display:block;"></canvas>
   </div>
 
   <button id="foto-back-btn" onclick="fotakSpat()">←</button>
@@ -252,8 +252,10 @@ input[type=range]#map-size-slider::-moz-range-thumb{
   <div id="foto-btns">
     <button class="cam-btn" onclick="toggleSettings()" id="settings-btn">⚙️</button>
     <button class="cam-btn" onclick="switchCam()">🔄</button>
-    <button class="shutter" onclick="capture()">📸</button>
-    <label class="cam-btn" for="file-input" style="cursor:pointer">🖼</label>
+    <button class="shutter" onclick="capture()">🎞</button>
+    <label class="cam-btn" for="native-cam-input" style="cursor:pointer" title="Natívny fotoaparát">📸</label>
+    <input type="file" id="native-cam-input" accept="image/*" capture="environment" onchange="fromNative(event)" style="display:none">
+    <label class="cam-btn" for="file-input" style="cursor:pointer" title="Zo súborov">🖼</label>
     <input type="file" id="file-input" accept="image/*" onchange="fromFile(event)" style="display:none">
   </div>
 </div>
@@ -539,15 +541,70 @@ function getGPS(){
 }
 
 function loadMapTile(lat,lon){
-  var zoom=16;
-  var tileX=Math.floor((lon+180)/360*Math.pow(2,zoom));
-  var tileY=Math.floor((1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(lat*Math.PI/180))/Math.PI)/2*Math.pow(2,zoom));
-  var img=document.getElementById('ov-map-img');
-  if(!img)return;
-  img.crossOrigin='anonymous';
-  img.onload=function(){img.style.display='block';};
-  img.onerror=function(){img.src='https://a.tile.openstreetmap.fr/osmfr/'+zoom+'/'+tileX+'/'+tileY+'.png';};
-  img.src='https://tile.openstreetmap.org/'+zoom+'/'+tileX+'/'+tileY+'.png';
+  var zoom=17;
+  var n=Math.pow(2,zoom);
+  // Presná poloha v tile súradniciach (desatinné číslo)
+  var txFloat=(lon+180)/360*n;
+  var latRad=lat*Math.PI/180;
+  var tyFloat=(1-Math.log(Math.tan(latRad)+1/Math.cos(latRad))/Math.PI)/2*n;
+  // Stredová dlaždica
+  var tx0=Math.floor(txFloat);
+  var ty0=Math.floor(tyFloat);
+  // Offset GPS bodu v rámci stredovej dlaždice (0-1)
+  var offX=txFloat-tx0;
+  var offY=tyFloat-ty0;
+
+  var TILE=256; // px na dlaždicu
+  var GRID=3;   // 3x3 mriežka
+  var canvas=document.getElementById('ov-map-canvas');
+  if(!canvas)return;
+  canvas.width=TILE*GRID;
+  canvas.height=TILE*GRID;
+  var ctx=canvas.getContext('2d');
+  ctx.fillStyle='#e8e0d8';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  var loaded=0, total=GRID*GRID;
+  for(var dy=0;dy<GRID;dy++){
+    for(var dx=0;dx<GRID;dx++){
+      (function(dx,dy){
+        var ttx=tx0+(dx-Math.floor(GRID/2));
+        var tty=ty0+(dy-Math.floor(GRID/2));
+        var img=new Image();
+        img.crossOrigin='anonymous';
+        var drawX=dx*TILE, drawY=dy*TILE;
+        img.onload=function(){
+          ctx.drawImage(img,drawX,drawY,TILE,TILE);
+          loaded++;
+          if(loaded===total) drawMapDot(ctx,canvas,offX,offY,TILE,GRID);
+        };
+        img.onerror=function(){
+          loaded++;
+          if(loaded===total) drawMapDot(ctx,canvas,offX,offY,TILE,GRID);
+        };
+        img.src='https://tile.openstreetmap.org/'+zoom+'/'+ttx+'/'+tty+'.png';
+      })(dx,dy);
+    }
+  }
+}
+
+function drawMapDot(ctx,canvas,offX,offY,TILE,GRID){
+  // Presná GPS poloha na canvase
+  var cx=Math.floor(GRID/2)*TILE+offX*TILE;
+  var cy=Math.floor(GRID/2)*TILE+offY*TILE;
+  // Červený kruh
+  ctx.beginPath();
+  ctx.arc(cx,cy,10,0,2*Math.PI);
+  ctx.fillStyle='rgba(220,50,50,0.9)';
+  ctx.fill();
+  ctx.strokeStyle='#fff';
+  ctx.lineWidth=2.5;
+  ctx.stroke();
+  // Biely stred
+  ctx.beginPath();
+  ctx.arc(cx,cy,3,0,2*Math.PI);
+  ctx.fillStyle='#fff';
+  ctx.fill();
 }
 
 function capture(){
@@ -573,12 +630,12 @@ function capture(){
     ctx.restore();
   }
   if(showMap){
-    var mimg=document.getElementById('ov-map-img');
-    if(mimg&&mimg.naturalWidth>0){
+    var mcanvas=document.getElementById('ov-map-canvas');
+    if(mcanvas&&mcanvas.width>0){
       var mapRatio=MAP_SIZE/window.innerWidth;
       var mw=Math.round(canvas.width*mapRatio),mh=Math.round(mw*0.82);
       ctx.save();ctx.beginPath();ctx.rect(canvas.width-mw,0,mw,mh);ctx.clip();
-      try{ctx.drawImage(mimg,canvas.width-mw,0,mw,mh);}catch(e){}
+      try{ctx.drawImage(mcanvas,canvas.width-mw,0,mw,mh);}catch(e){}
       ctx.restore();
       ctx.strokeStyle='rgba(255,255,255,0.85)';ctx.lineWidth=2;
       ctx.beginPath();ctx.rect(canvas.width-mw,0,mw,mh);ctx.stroke();
@@ -624,6 +681,58 @@ function fromFile(e){
   if(!file)return;
   var reader=new FileReader();
   reader.onload=function(ev){CURRENT_PHOTOS.push(ev.target.result);stopCam();goUdaje();};
+  reader.readAsDataURL(file);
+  e.target.value='';
+}
+
+function fromNative(e){
+  var file=e.target.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    // Pridaj overlay ak je zapnutý
+    var img=new Image();
+    img.onload=function(){
+      var c=document.createElement('canvas');
+      c.width=img.width;c.height=img.height;
+      var x=c.getContext('2d');
+      x.drawImage(img,0,0);
+      var showTime=document.getElementById('ov-time').checked;
+      var showAddr=document.getElementById('ov-addr').checked;
+      var showLabel=document.getElementById('ov-label').checked;
+      if(showLabel){
+        var lfs=Math.round(c.width*0.1);
+        x.font='900 '+lfs+'px Arial';
+        x.shadowColor='rgba(0,0,0,0.9)';x.shadowBlur=14;
+        x.fillStyle='#ffffff';
+        x.fillText(CURRENT_OZN,16,lfs+16);
+      }
+      if(showTime||showAddr){
+        var h=c.height,w=c.width;
+        var gradH=Math.round(h*0.22);
+        var grad=x.createLinearGradient(0,h-gradH,0,h);
+        grad.addColorStop(0,'rgba(0,0,0,0)');grad.addColorStop(1,'rgba(0,0,0,0.8)');
+        x.fillStyle=grad;x.fillRect(0,h-gradH,w,gradH);
+        x.fillStyle='#fff';
+        if(showTime){
+          var now=new Date();
+          var ts=pad(now.getHours())+':'+pad(now.getMinutes())+' | '+pad(now.getDate())+'/'+pad(now.getMonth()+1)+'/'+now.getFullYear();
+          var fs=Math.round(w*0.048);
+          x.font='bold '+fs+'px Arial';x.shadowBlur=4;x.shadowColor='rgba(0,0,0,0.5)';
+          x.fillText(ts,16,h-gradH+fs+8);
+        }
+        if(showAddr&&ADDR){
+          var fs2=Math.round(w*0.032);
+          x.font=fs2+'px Arial';x.shadowBlur=3;
+          x.fillText(ADDR,16,h-18);
+        }
+        x.shadowBlur=0;
+      }
+      CURRENT_PHOTOS.push(c.toDataURL('image/jpeg',0.95));
+      stopCam();goUdaje();
+    };
+    img.src=ev.target.result;
+  };
   reader.readAsDataURL(file);
   e.target.value='';
 }
