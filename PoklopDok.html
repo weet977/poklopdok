@@ -29,9 +29,6 @@ textarea{height:72px;resize:none}
 .btn-secondary:active{background:#f5f5f0}
 .btn-danger{background:#fff;border:1px solid #f0bbbb;color:#c0392b}
 .btn-danger:active{background:#fdf0f0}
-.btn-sm{padding:8px 14px;font-size:13px;border-radius:8px;cursor:pointer;border:none;font-weight:600}
-.btn-icon{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);border-radius:12px;padding:0;width:54px;height:54px;cursor:pointer;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.btn-icon:active{background:rgba(255,255,255,.3)}
 .top-bar{display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding-top:.25rem}
 .back-btn{background:none;border:none;cursor:pointer;font-size:24px;color:#111;padding:4px;line-height:1;flex-shrink:0}
 .app-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;padding-top:.5rem}
@@ -42,45 +39,79 @@ textarea{height:72px;resize:none}
 .pokl-item{background:#fff;border:1px solid #e5e5e0;border-radius:12px;padding:.85rem 1rem;margin-bottom:.5rem;cursor:pointer}
 .pokl-item:active{background:#f5f5f0}
 .badge{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;background:#e8f5ee;color:#0F6E56}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.15)}
-.toggle-row:last-child{border-bottom:none}
-.toggle-sw{position:relative;width:46px;height:26px;flex-shrink:0}
+.toggle-sw{position:relative;width:44px;height:24px;flex-shrink:0}
 .toggle-sw input{opacity:0;width:0;height:0;position:absolute}
-.sw-track{position:absolute;inset:0;background:rgba(255,255,255,.25);border-radius:13px;cursor:pointer;transition:.2s}
-.sw-track:before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.sw-track{position:absolute;inset:0;background:#555;border-radius:12px;cursor:pointer;transition:.2s}
+.sw-track:before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 input:checked+.sw-track{background:#1D9E75}
 input:checked+.sw-track:before{transform:translateX(20px)}
-#foto-header{position:absolute;top:0;left:0;right:0;z-index:10;background:linear-gradient(rgba(0,0,0,.75),transparent);padding:.75rem 1rem 1.5rem;}
-#foto-controls-bar{display:flex;align-items:center;gap:10px;margin-bottom:.5rem;}
-#foto-back{background:none;border:none;cursor:pointer;font-size:24px;color:#fff;padding:4px;line-height:1;flex-shrink:0}
-#foto-title{font-size:17px;font-weight:600;color:#fff;flex:1}
-#foto-counter{font-size:13px;color:rgba(255,255,255,.8);background:rgba(0,0,0,.4);padding:4px 10px;border-radius:20px;flex-shrink:0}
-.toggle-row-foto{display:flex;align-items:center;gap:6px}
-.toggle-label-foto{font-size:13px;color:rgba(255,255,255,.9);white-space:nowrap}
+
+/* FOŤÁK */
 #video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
 #canvas-el{display:none}
+
+/* Overlay čas/adresa dole */
 .cam-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 14px 110px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;pointer-events:none;z-index:5;}
 .cam-overlay.hidden{display:none}
 #ov-time-text{font-size:20px;font-weight:700;letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 #ov-addr-text{font-size:12px;margin-top:3px;opacity:.93;text-shadow:0 1px 2px rgba(0,0,0,.6)}
-/* Označenie poklopu – veľké v ľavom rohu navrchu */
-#ov-label-wrap{position:absolute;top:0;left:0;z-index:7;pointer-events:none;}
+
+/* Označenie vľavo hore */
+#ov-label-wrap{position:absolute;top:10px;left:10px;z-index:7;pointer-events:none;}
 #ov-label-wrap.hidden{display:none}
-#ov-label-text{font-size:0;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.8),0 0 20px rgba(0,0,0,.6);padding:10px 14px;letter-spacing:.04em;line-height:1}
+#ov-label-text{font-size:42px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.9),0 0 20px rgba(0,0,0,.7);line-height:1}
+
+/* Mapa vpravo hore */
 #ov-map-wrap{position:absolute;top:0;right:0;width:110px;height:90px;border-radius:0 0 0 10px;overflow:hidden;border-left:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8);z-index:6;background:#ccc;}
 #ov-map-wrap.hidden{display:none}
 #ov-map-img{width:100%;height:100%;object-fit:cover;display:block}
-#foto-btns{position:absolute;bottom:0;left:0;right:0;z-index:10;background:linear-gradient(transparent,rgba(0,0,0,.85));padding:1rem 1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-around;}
+
+/* Späť tlačidlo navrchu */
+#foto-back-btn{position:absolute;top:12px;left:12px;z-index:10;background:rgba(0,0,0,.45);border:none;border-radius:50%;width:40px;height:40px;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* Counter vpravo navrchu */
+#foto-counter{position:absolute;top:14px;right:120px;z-index:10;background:rgba(0,0,0,.5);color:#fff;font-size:13px;padding:5px 12px;border-radius:20px;}
+#foto-counter.hidden{display:none}
+
+/* Spodné tlačidlá */
+#foto-btns{position:absolute;bottom:0;left:0;right:0;z-index:10;background:linear-gradient(transparent,rgba(0,0,0,.85));padding:1rem 2rem 1.75rem;display:flex;align-items:center;justify-content:space-around;}
+
+.cam-btn{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.4);border-radius:14px;padding:0;width:54px;height:54px;cursor:pointer;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cam-btn:active{background:rgba(255,255,255,.35)}
+
 .shutter{width:72px;height:72px;border-radius:50%;background:#fff;border:4px solid rgba(255,255,255,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;box-shadow:0 2px 12px rgba(0,0,0,.4);}
 .shutter:active{transform:scale(.9)}
-/* Foto strip – náhľady fotiek v udaje screene */
+
+/* Settings popup */
+#settings-popup{
+  position:absolute;bottom:105px;left:12px;z-index:20;
+  background:rgba(20,20,20,.92);backdrop-filter:blur(10px);
+  border-radius:16px;padding:14px 16px;min-width:200px;
+  display:none;border:1px solid rgba(255,255,255,.15);
+}
+#settings-popup.open{display:block}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.settings-row:last-child{border-bottom:none}
+.settings-label{font-size:14px;color:rgba(255,255,255,.9)}
+
+/* Foto strip */
 .foto-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:.75rem;-webkit-overflow-scrolling:touch}
 .foto-thumb-wrap{position:relative;flex-shrink:0}
-.foto-thumb{width:80px;height:80px;border-radius:10px;object-fit:cover;display:block;border:2px solid #e5e5e0}
-.foto-thumb.active-thumb{border-color:#1D9E75;border-width:2.5px}
+.foto-thumb{width:80px;height:80px;border-radius:10px;object-fit:cover;display:block;border:2px solid #e5e5e0;cursor:pointer}
+.foto-thumb:active{opacity:.8}
 .foto-del{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#e74c3c;color:#fff;font-size:12px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1}
 .foto-add-btn{width:80px;height:80px;border-radius:10px;border:2px dashed #ccc;background:#fafaf8;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;flex-shrink:0;color:#aaa}
-.foto-add-btn:active{background:#f0f0ec}
+
+/* Lightbox */
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;}
+#lightbox.open{display:flex}
+#lb-img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;}
+#lb-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#lb-nav{display:flex;gap:16px;margin-top:16px;}
+.lb-nav-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:22px;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lb-nav-btn:active{background:rgba(255,255,255,.3)}
+#lb-counter{color:rgba(255,255,255,.7);font-size:14px;margin-top:8px;}
+
 .export-box{background:#fff;border-radius:12px;border:1px solid #e5e5e0;padding:1rem;font-size:13px;font-family:monospace;white-space:pre-wrap;color:#222;max-height:340px;overflow-y:auto;margin-bottom:.75rem;line-height:1.7}
 .empty-state{color:#aaa;font-size:14px;padding:.75rem 0;text-align:center}
 .chevron{color:#ccc;font-size:20px}
@@ -89,6 +120,17 @@ input:checked+.sw-track:before{transform:translateX(20px)}
 </style>
 </head>
 <body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lb-close" onclick="closeLightbox()">×</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-nav">
+    <button class="lb-nav-btn" onclick="lbPrev()">‹</button>
+    <button class="lb-nav-btn" onclick="lbNext()">›</button>
+  </div>
+  <div id="lb-counter"></div>
+</div>
 
 <!-- SCREEN: Home -->
 <div class="screen active" id="s-home">
@@ -151,7 +193,6 @@ input:checked+.sw-track:before{transform:translateX(20px)}
     <div id="ov-addr-text">Načítavam GPS...</div>
   </div>
 
-  <!-- Označenie poklopu vľavo hore (pod header-om) -->
   <div id="ov-label-wrap">
     <div id="ov-label-text"></div>
   </div>
@@ -160,36 +201,34 @@ input:checked+.sw-track:before{transform:translateX(20px)}
     <img id="ov-map-img" src="" alt="mapa">
   </div>
 
-  <div id="foto-header">
-    <div id="foto-controls-bar">
-      <button id="foto-back" onclick="fotakSpat()">←</button>
-      <span id="foto-title">Fotka</span>
-      <span id="foto-counter">1/1</span>
+  <button id="foto-back-btn" onclick="fotakSpat()">←</button>
+  <div id="foto-counter"></div>
+
+  <!-- Settings popup -->
+  <div id="settings-popup">
+    <div class="settings-row">
+      <span class="settings-label">⏰ Čas a dátum</span>
+      <label class="toggle-sw"><input type="checkbox" id="ov-time" checked onchange="updOv()"><span class="sw-track"></span></label>
     </div>
-    <div style="display:flex;gap:1rem;padding-left:2px;flex-wrap:wrap">
-      <div class="toggle-row-foto">
-        <span class="toggle-label-foto">⏰</span>&nbsp;
-        <label class="toggle-sw"><input type="checkbox" id="ov-time" checked onchange="updOv()"><span class="sw-track"></span></label>
-      </div>
-      <div class="toggle-row-foto">
-        <span class="toggle-label-foto">📍 Adresa</span>&nbsp;
-        <label class="toggle-sw"><input type="checkbox" id="ov-addr" checked onchange="updOv()"><span class="sw-track"></span></label>
-      </div>
-      <div class="toggle-row-foto">
-        <span class="toggle-label-foto">🗺 Mapa</span>&nbsp;
-        <label class="toggle-sw"><input type="checkbox" id="ov-map" checked onchange="updOv()"><span class="sw-track"></span></label>
-      </div>
-      <div class="toggle-row-foto">
-        <span class="toggle-label-foto">🏷 Označenie</span>&nbsp;
-        <label class="toggle-sw"><input type="checkbox" id="ov-label" checked onchange="updOv()"><span class="sw-track"></span></label>
-      </div>
+    <div class="settings-row">
+      <span class="settings-label">📍 Adresa</span>
+      <label class="toggle-sw"><input type="checkbox" id="ov-addr" checked onchange="updOv()"><span class="sw-track"></span></label>
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">🗺 Mapka</span>
+      <label class="toggle-sw"><input type="checkbox" id="ov-map" checked onchange="updOv()"><span class="sw-track"></span></label>
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">🏷 Označenie</span>
+      <label class="toggle-sw"><input type="checkbox" id="ov-label" checked onchange="updOv()"><span class="sw-track"></span></label>
     </div>
   </div>
 
   <div id="foto-btns">
-    <button class="btn-icon" onclick="switchCam()">🔄</button>
+    <button class="cam-btn" onclick="toggleSettings()" id="settings-btn">⚙️</button>
+    <button class="cam-btn" onclick="switchCam()">🔄</button>
     <button class="shutter" onclick="capture()">📸</button>
-    <label class="btn-icon" for="file-input" style="cursor:pointer">🖼</label>
+    <label class="cam-btn" for="file-input" style="cursor:pointer">🖼</label>
     <input type="file" id="file-input" accept="image/*" onchange="fromFile(event)" style="display:none">
   </div>
 </div>
@@ -201,13 +240,8 @@ input:checked+.sw-track:before{transform:translateX(20px)}
     <h2 style="margin:0" id="u-title">Poklop X1</h2>
   </div>
 
-  <!-- Foto strip s náhľadmi -->
-  <div id="foto-strip-wrap">
-    <div class="section-label">Fotky (<span id="foto-count">0</span>/5)</div>
-    <div class="foto-strip" id="foto-strip">
-      <div class="foto-add-btn" onclick="pridajDalsiuFotku()" id="foto-add-btn">+</div>
-    </div>
-  </div>
+  <div class="section-label">Fotky (<span id="foto-count">0</span>/5)</div>
+  <div class="foto-strip" id="foto-strip"></div>
 
   <div class="card">
     <label>Typ poklopu</label>
@@ -263,17 +297,16 @@ input:checked+.sw-track:before{transform:translateX(20px)}
 var DB=JSON.parse(localStorage.getItem('poklopdok_v3')||'{}');
 var CUR=null,ADDR='',COORDS=null;
 var STREAM=null,FACING='environment',CLOCK=null,EDIT_IDX=-1;
-
-// Aktuálny poklop v editácii
-var CURRENT_PHOTOS=[]; // pole foto dataURL
-var CURRENT_OZN='X1'; // označenie poklopu pre overlay
-var FOTO_MODE='new'; // 'new' alebo 'edit'
+var CURRENT_PHOTOS=[],CURRENT_OZN='X1';
+var LB_PHOTOS=[],LB_IDX=0;
+var SETTINGS_OPEN=false;
 
 function save(){localStorage.setItem('poklopdok_v3',JSON.stringify(DB));}
 
 function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-foto').classList.remove('active');
+  closeSettings();
   if(id==='s-foto'){
     document.getElementById('s-foto').classList.add('active');
     startCam();
@@ -318,8 +351,16 @@ function renderDetail(){
   el.innerHTML=o.poklopy.map((p,i)=>{
     var tl=p.typ==='Iné'&&p.typIne?p.typIne:p.typ;
     var pl=p.povrch==='Iné'&&p.povrchIne?p.povrchIne:p.povrch;
-    var fotoCount=p.fotos?p.fotos.length:0;
-    return '<div class="pokl-item" onclick="editPokl('+i+')"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:15px;font-weight:700;color:#1D9E75">'+esc(p.oznacenie)+'</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:12px;color:#aaa">📷 '+fotoCount+'</span><span class="badge">'+esc(tl)+'</span></div></div><div style="font-size:13px;color:#444">'+esc(pl)+' · výrez: '+esc(p.vyrez)+' · hl: '+esc(p.hlbka)+'</div><div style="font-size:12px;color:#aaa;margin-top:2px">'+esc(p.adresa)+'</div>'+(p.pozn?'<div style="font-size:12px;color:#c0392b;margin-top:2px">⚠ '+esc(p.pozn)+'</div>':'')+'</div>';
+    var fc=p.fotos?p.fotos.length:0;
+    var thumbs='';
+    if(p.fotos&&p.fotos.length){
+      thumbs='<div style="display:flex;gap:6px;margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch">';
+      p.fotos.forEach(function(f,fi){
+        thumbs+='<img src="'+f+'" onclick="openLightbox('+i+','+fi+');event.stopPropagation()" style="width:60px;height:60px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1.5px solid #e5e5e0;cursor:pointer" alt="">';
+      });
+      thumbs+='</div>';
+    }
+    return '<div class="pokl-item" onclick="editPokl('+i+')"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:15px;font-weight:700;color:#1D9E75">'+esc(p.oznacenie)+'</span><div style="display:flex;gap:6px;align-items:center"><span style="font-size:12px;color:#aaa">📷 '+fc+'</span><span class="badge">'+esc(tl)+'</span></div></div><div style="font-size:13px;color:#444">'+esc(pl)+' · výrez: '+esc(p.vyrez)+' · hl: '+esc(p.hlbka)+'</div><div style="font-size:12px;color:#aaa;margin-top:2px">'+esc(p.adresa)+'</div>'+(p.pozn?'<div style="font-size:12px;color:#c0392b;margin-top:2px">⚠ '+esc(p.pozn)+'</div>':'')+thumbs+'</div>';
   }).join('');
 }
 
@@ -328,55 +369,61 @@ function delObhl(){
   delete DB[CUR];save();CUR=null;go('s-home');
 }
 
-// Začni nový poklop – otvor foťák
-function startNovyPoklop(){
+// ===== LIGHTBOX =====
+function openLightbox(poklIdx,fotoIdx){
   var o=DB[CUR];
-  EDIT_IDX=-1;
-  CURRENT_PHOTOS=[];
-  CURRENT_OZN='X'+((o.poklopy?o.poklopy.length:0)+1);
-  FOTO_MODE='new';
-  otvorFotak();
+  var p=o.poklopy[poklIdx];
+  LB_PHOTOS=p.fotos||[];
+  LB_IDX=fotoIdx;
+  showLbPhoto();
+  document.getElementById('lightbox').classList.add('open');
 }
 
-// Pridaj ďalšiu fotku k existujúcemu poklopu (z udaje screenu)
-function pridajDalsiuFotku(){
-  if(CURRENT_PHOTOS.length>=5){alert('Maximálny počet fotiek je 5.');return;}
-  otvorFotak();
+function showLbPhoto(){
+  document.getElementById('lb-img').src=LB_PHOTOS[LB_IDX];
+  document.getElementById('lb-counter').textContent=(LB_IDX+1)+' / '+LB_PHOTOS.length;
+  document.getElementById('lightbox').querySelector('#lb-nav').style.display=LB_PHOTOS.length>1?'flex':'none';
 }
 
-function otvorFotak(){
-  updateFotoCounter();
-  updateOvLabel();
-  go('s-foto');
-}
+function lbPrev(){LB_IDX=(LB_IDX-1+LB_PHOTOS.length)%LB_PHOTOS.length;showLbPhoto();}
+function lbNext(){LB_IDX=(LB_IDX+1)%LB_PHOTOS.length;showLbPhoto();}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
 
-function updateFotoCounter(){
-  var el=document.getElementById('foto-counter');
-  if(el) el.textContent=(CURRENT_PHOTOS.length+1)+'/max 5';
+// ===== SETTINGS TOGGLE =====
+function toggleSettings(){
+  SETTINGS_OPEN=!SETTINGS_OPEN;
+  document.getElementById('settings-popup').classList.toggle('open',SETTINGS_OPEN);
 }
-
-function updateOvLabel(){
-  var el=document.getElementById('ov-label-text');
-  if(el){
-    var fs=Math.round(window.innerWidth*0.12);
-    el.style.fontSize=fs+'px';
-    el.textContent=CURRENT_OZN;
-  }
+function closeSettings(){
+  SETTINGS_OPEN=false;
+  var sp=document.getElementById('settings-popup');
+  if(sp) sp.classList.remove('open');
 }
 
 // ===== KAMERA =====
+function startNovyPoklop(){
+  var o=DB[CUR];
+  EDIT_IDX=-1;CURRENT_PHOTOS=[];
+  CURRENT_OZN='X'+((o.poklopy?o.poklopy.length:0)+1);
+  go('s-foto');
+}
+
+function pridajDalsiuFotku(){
+  if(CURRENT_PHOTOS.length>=5){alert('Maximálny počet fotiek je 5.');return;}
+  go('s-foto');
+}
+
 function startCam(){
   ADDR='';COORDS=null;
   var ael=document.getElementById('ov-addr-text');
   if(ael) ael.textContent='Načítavam GPS...';
   var mimg=document.getElementById('ov-map-img');
   if(mimg) mimg.src='';
-  updateOvLabel();
-  getGPS();
-  startClock();
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
-    showCamErr('Kamera nie je dostupná. Použi 🖼.');return;
-  }
+  document.getElementById('ov-label-text').textContent=CURRENT_OZN;
+  var fc=document.getElementById('foto-counter');
+  if(fc){fc.textContent='Fotka '+(CURRENT_PHOTOS.length+1);fc.classList.remove('hidden');}
+  getGPS();startClock();
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return;
   navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:FACING},width:{ideal:1920},height:{ideal:1080}},audio:false})
     .then(function(stream){
       STREAM=stream;
@@ -386,14 +433,7 @@ function startCam(){
       var p=v.play();
       if(p!==undefined) p.catch(function(){});
     })
-    .catch(function(err){
-      showCamErr('Prístup ku kamere zamietnutý. Použi 🖼.');
-    });
-}
-
-function showCamErr(msg){
-  var v=document.getElementById('video');
-  if(v) v.style.display='none';
+    .catch(function(){});
 }
 
 function stopCam(){
@@ -453,80 +493,66 @@ function getGPS(){
         if(el) el.textContent=ADDR;
       })
       .catch(()=>{ADDR=COORDS.lat+'°N, '+COORDS.lon+'°E';var el=document.getElementById('ov-addr-text');if(el)el.textContent=ADDR;});
-  },function(){ADDR='GPS nedostupné';var el=document.getElementById('ov-addr-text');if(el)el.textContent='GPS nedostupné';},{enableHighAccuracy:true,timeout:10000});
+  },function(){ADDR='GPS nedostupné';},{enableHighAccuracy:true,timeout:10000});
 }
 
 function loadMapTile(lat,lon){
   var zoom=16;
   var tileX=Math.floor((lon+180)/360*Math.pow(2,zoom));
   var tileY=Math.floor((1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(lat*Math.PI/180))/Math.PI)/2*Math.pow(2,zoom));
-  var url='https://tile.openstreetmap.org/'+zoom+'/'+tileX+'/'+tileY+'.png';
   var img=document.getElementById('ov-map-img');
   if(!img)return;
   img.crossOrigin='anonymous';
   img.onload=function(){img.style.display='block';};
   img.onerror=function(){img.src='https://a.tile.openstreetmap.fr/osmfr/'+zoom+'/'+tileX+'/'+tileY+'.png';};
-  img.src=url;
+  img.src='https://tile.openstreetmap.org/'+zoom+'/'+tileX+'/'+tileY+'.png';
 }
 
 function capture(){
+  closeSettings();
   var video=document.getElementById('video');
   var canvas=document.getElementById('canvas-el');
   if(!video||!video.videoWidth||video.videoWidth===0){alert('Kamera nie je pripravená.');return;}
-  canvas.width=video.videoWidth;
-  canvas.height=video.videoHeight;
+  canvas.width=video.videoWidth;canvas.height=video.videoHeight;
   var ctx=canvas.getContext('2d');
   ctx.drawImage(video,0,0);
-
   var showTime=document.getElementById('ov-time').checked;
   var showAddr=document.getElementById('ov-addr').checked;
   var showMap=document.getElementById('ov-map').checked;
   var showLabel=document.getElementById('ov-label').checked;
 
-  // Označenie poklopu – vľavo hore (pod prípadnou mapou)
   if(showLabel){
     var lfs=Math.round(canvas.width*0.1);
     ctx.save();
     ctx.font='900 '+lfs+'px Arial';
-    ctx.shadowColor='rgba(0,0,0,0.85)';ctx.shadowBlur=12;
-    // Pozícia: pod mapkou ak je mapa vpravo, alebo vľavo hore
-    var lx=16, ly=lfs+12;
+    ctx.shadowColor='rgba(0,0,0,0.9)';ctx.shadowBlur=14;
     ctx.fillStyle='#ffffff';
-    ctx.fillText(CURRENT_OZN,lx,ly);
+    ctx.fillText(CURRENT_OZN,16,lfs+16);
     ctx.restore();
   }
-
-  // Mapa vpravo hore
   if(showMap){
     var mimg=document.getElementById('ov-map-img');
     if(mimg&&mimg.naturalWidth>0){
       var mw=Math.round(canvas.width*0.24),mh=Math.round(mw*0.75);
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(canvas.width-mw,0,mw,mh);
-      ctx.clip();
+      ctx.save();ctx.beginPath();ctx.rect(canvas.width-mw,0,mw,mh);ctx.clip();
       try{ctx.drawImage(mimg,canvas.width-mw,0,mw,mh);}catch(e){}
       ctx.restore();
       ctx.strokeStyle='rgba(255,255,255,0.85)';ctx.lineWidth=2;
       ctx.beginPath();ctx.rect(canvas.width-mw,0,mw,mh);ctx.stroke();
     }
   }
-
-  // Čas + adresa dole
   if(showTime||showAddr){
     var h=canvas.height,w=canvas.width;
     var gradH=Math.round(h*0.22);
     var grad=ctx.createLinearGradient(0,h-gradH,0,h);
-    grad.addColorStop(0,'rgba(0,0,0,0)');
-    grad.addColorStop(1,'rgba(0,0,0,0.8)');
+    grad.addColorStop(0,'rgba(0,0,0,0)');grad.addColorStop(1,'rgba(0,0,0,0.8)');
     ctx.fillStyle=grad;ctx.fillRect(0,h-gradH,w,gradH);
     ctx.fillStyle='#ffffff';
     if(showTime){
       var now=new Date();
       var ts=pad(now.getHours())+':'+pad(now.getMinutes())+' | '+pad(now.getDate())+'/'+pad(now.getMonth()+1)+'/'+now.getFullYear();
       var fs=Math.round(w*0.048);
-      ctx.font='bold '+fs+'px Arial';
-      ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=4;
+      ctx.font='bold '+fs+'px Arial';ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=4;
       ctx.fillText(ts,16,h-gradH+fs+8);
     }
     if(showAddr&&ADDR){
@@ -538,6 +564,13 @@ function capture(){
   }
 
   var photoData=canvas.toDataURL('image/jpeg',0.92);
+
+  // Auto-stiahnutie do telefónu
+  var a=document.createElement('a');
+  a.href=photoData;
+  a.download=CURRENT_OZN+'_foto'+(CURRENT_PHOTOS.length+1)+'_'+new Date().toISOString().slice(0,10)+'.jpg';
+  a.click();
+
   CURRENT_PHOTOS.push(photoData);
   stopCam();
   goUdaje();
@@ -547,32 +580,20 @@ function fromFile(e){
   var file=e.target.files[0];
   if(!file)return;
   var reader=new FileReader();
-  reader.onload=function(ev){
-    CURRENT_PHOTOS.push(ev.target.result);
-    stopCam();
-    goUdaje();
-  };
+  reader.onload=function(ev){CURRENT_PHOTOS.push(ev.target.result);stopCam();goUdaje();};
   reader.readAsDataURL(file);
   e.target.value='';
 }
 
-// Späť z foťáka
 function fotakSpat(){
-  stopCam();
-  if(CURRENT_PHOTOS.length>0){
-    // Máme aspoň jednu fotku, idi na udaje
-    goUdaje();
-  } else {
-    go('s-detail');
-  }
+  stopCam();closeSettings();
+  if(CURRENT_PHOTOS.length>0){goUdaje();}else{go('s-detail');}
 }
 
 function goUdaje(){
   stopCam();
   var o=DB[CUR];
-
   if(EDIT_IDX<0){
-    // Nový poklop
     document.getElementById('u-title').textContent=CURRENT_OZN;
     document.getElementById('u-adresa').value=ADDR||'';
     document.getElementById('u-coords').textContent=COORDS?COORDS.lat+'°N, '+COORDS.lon+'°E':'';
@@ -582,12 +603,9 @@ function goUdaje(){
     document.getElementById('typ-ine-wrap').style.display='none';
     document.getElementById('povrch-ine-wrap').style.display='none';
   } else {
-    // Editácia – polia sú už vyplnené
     document.getElementById('u-title').textContent=CURRENT_OZN+' (upraviť)';
   }
-
   renderFotoStrip();
-
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-foto').classList.remove('active');
   document.getElementById('s-udaje').classList.add('active');
@@ -595,43 +613,37 @@ function goUdaje(){
 
 function renderFotoStrip(){
   var strip=document.getElementById('foto-strip');
-  var count=document.getElementById('foto-count');
-  count.textContent=CURRENT_PHOTOS.length;
+  document.getElementById('foto-count').textContent=CURRENT_PHOTOS.length;
   strip.innerHTML='';
   CURRENT_PHOTOS.forEach(function(src,i){
     var wrap=document.createElement('div');
     wrap.className='foto-thumb-wrap';
     var img=document.createElement('img');
-    img.className='foto-thumb';
-    img.src=src;
+    img.className='foto-thumb';img.src=src;
+    img.onclick=function(){openLightboxLocal(i);};
     var del=document.createElement('button');
-    del.className='foto-del';
-    del.textContent='×';
-    del.onclick=function(){deleteFoto(i);};
-    wrap.appendChild(img);
-    wrap.appendChild(del);
-    strip.appendChild(wrap);
+    del.className='foto-del';del.textContent='×';
+    del.onclick=function(){CURRENT_PHOTOS.splice(i,1);renderFotoStrip();};
+    wrap.appendChild(img);wrap.appendChild(del);strip.appendChild(wrap);
   });
   if(CURRENT_PHOTOS.length<5){
     var addBtn=document.createElement('div');
-    addBtn.className='foto-add-btn';
-    addBtn.textContent='+';
+    addBtn.className='foto-add-btn';addBtn.textContent='+';
     addBtn.onclick=pridajDalsiuFotku;
     strip.appendChild(addBtn);
   }
 }
 
-function deleteFoto(i){
-  CURRENT_PHOTOS.splice(i,1);
-  renderFotoStrip();
+function openLightboxLocal(idx){
+  LB_PHOTOS=CURRENT_PHOTOS;LB_IDX=idx;
+  showLbPhoto();
+  document.getElementById('lightbox').classList.add('open');
 }
 
 function editPokl(i){
   var o=DB[CUR];var p=o.poklopy[i];
-  EDIT_IDX=i;
-  CURRENT_OZN=p.oznacenie;
+  EDIT_IDX=i;CURRENT_OZN=p.oznacenie;
   CURRENT_PHOTOS=p.fotos?p.fotos.slice():[];
-  FOTO_MODE='edit';
   document.getElementById('u-title').textContent=p.oznacenie+' (upraviť)';
   document.getElementById('u-typ').value=p.typ;
   document.getElementById('u-rozmer').value=p.rozmer;
@@ -654,38 +666,28 @@ function chkTyp(){document.getElementById('typ-ine-wrap').style.display=document
 function chkPovrch(){document.getElementById('povrch-ine-wrap').style.display=document.getElementById('u-povrch').value==='Iné'?'block':'none';}
 
 function ulozPokl(){
-  var o=DB[CUR];
-  if(!o.poklopy)o.poklopy=[];
+  var o=DB[CUR];if(!o.poklopy)o.poklopy=[];
   var isEdit=EDIT_IDX>=0;
   var ozn=isEdit?o.poklopy[EDIT_IDX].oznacenie:CURRENT_OZN;
   var pokl={
-    oznacenie:ozn,
-    typ:document.getElementById('u-typ').value,
-    typIne:document.getElementById('u-typ-ine').value,
-    rozmer:document.getElementById('u-rozmer').value,
-    povrch:document.getElementById('u-povrch').value,
-    povrchIne:document.getElementById('u-povrch-ine').value,
-    vyrez:document.getElementById('u-vyrez').value,
-    hlbka:document.getElementById('u-hlbka').value,
-    adresa:document.getElementById('u-adresa').value,
-    coords:document.getElementById('u-coords').textContent,
-    pozn:document.getElementById('u-pozn').value,
+    oznacenie:ozn,typ:document.getElementById('u-typ').value,typIne:document.getElementById('u-typ-ine').value,
+    rozmer:document.getElementById('u-rozmer').value,povrch:document.getElementById('u-povrch').value,
+    povrchIne:document.getElementById('u-povrch-ine').value,vyrez:document.getElementById('u-vyrez').value,
+    hlbka:document.getElementById('u-hlbka').value,adresa:document.getElementById('u-adresa').value,
+    coords:document.getElementById('u-coords').textContent,pozn:document.getElementById('u-pozn').value,
     fotos:CURRENT_PHOTOS.slice()
   };
   if(isEdit){o.poklopy[EDIT_IDX]=pokl;}else{o.poklopy.push(pokl);}
-  save();CURRENT_PHOTOS=[];EDIT_IDX=-1;
-  go('s-detail');
+  save();CURRENT_PHOTOS=[];EDIT_IDX=-1;go('s-detail');
 }
 
 function showExport(){
-  var o=DB[CUR];
-  var lines=[];
+  var o=DB[CUR];var lines=[];
   lines.push('Obhliadka pre '+o.klient);
   lines.push('Miesto: '+o.miesto);
   if(o.pozn) lines.push('Popis: '+o.pozn);
   if(o.pocet) lines.push('Plánovaný počet: '+o.pocet);
-  lines.push('Dátum: '+o.datum);
-  lines.push('');
+  lines.push('Dátum: '+o.datum);lines.push('');
   (o.poklopy||[]).forEach(function(p){
     var tl=p.typ==='Iné'&&p.typIne?p.typIne:p.typ;
     var pl=p.povrch==='Iné'&&p.povrchIne?p.povrchIne:p.povrch;
@@ -696,8 +698,7 @@ function showExport(){
     if(p.pozn) line+=', '+p.pozn;
     lines.push(line);
   });
-  document.getElementById('exp-text').textContent=lines.join('\n');
-  go('s-export');
+  document.getElementById('exp-text').textContent=lines.join('\n');go('s-export');
 }
 
 function copyExp(){
@@ -716,6 +717,13 @@ function fbCopy(t){
 }
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// Zatvori settings pri kliknutí mimo
+document.addEventListener('click',function(e){
+  if(SETTINGS_OPEN&&!document.getElementById('settings-popup').contains(e.target)&&e.target.id!=='settings-btn'){
+    closeSettings();
+  }
+});
 
 renderHome();
 </script>
